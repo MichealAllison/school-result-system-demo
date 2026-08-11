@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Greenwood International School — Result Portal</title>
+<title>Australian International Standard School — Result Portal</title>
 <style>
   :root{
     --ink:#16233F;
@@ -146,12 +146,173 @@
     text-align:center; color:#8592AC; font-size:12px; padding:16px; letter-spacing:0.2px;
   }
 
+    @page{margin:1.5cm;}
+
+  /* ===== Termly Result Sheet (Parent / Student view) ===== */
+  .result-sheet{
+    font-family:'Georgia','Times New Roman',serif;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:28px 28px 18px;
+  }
+
+  /* ---- Header: crest + school identity + title ---- */
+  .result-header{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:14px;padding-bottom:14px;border-bottom:3px solid var(--brass);flex-wrap:wrap;
+  }
+  .result-header .row{display:flex;align-items:center;gap:14px;}
+  .result-header .crest{
+    width:56px;height:56px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,var(--brass),var(--brass-2));
+    box-shadow:0 0 0 3px rgba(184,144,47,.35);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-weight:700;font-size:20px;color:var(--ink);
+  }
+  .school-block .school-name{
+    font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;
+    color:var(--ink);letter-spacing:0.4px;
+  }
+  .school-block .school-sub{
+    font-family:Georgia,serif;font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:0.3px;
+  }
+  .result-title{
+    font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;
+    color:var(--ink-2);letter-spacing:0.8px;text-transform:uppercase;
+  }
+
+  /* ---- Student info bar (horizontal, not a table grid) ---- */
+  .student-info-bar{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:8px 12px;
+    padding:16px 18px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin:18px 0;
+  }
+  .student-info-bar .info-group{display:flex;flex-direction:column;}
+  .student-info-bar .info-group .label{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);
+  }
+  .student-info-bar .info-group .value{
+    font-size:13.5px;font-weight:600;color:var(--ink);margin-top:2px;
+  }
+
+  /* ---- Results table: clean borders, no spreadsheet gridlines ---- */
+  .results-table{
+    width:100%;border-collapse:separate;border-spacing:0;
+    border-radius:10px;overflow:hidden;
+    border:1px solid var(--line);background:#fff;
+    -webkit-print-color-adjust:exact;color-adjust:exact;
+  }
+  .results-table thead tr{background:var(--brass);}
+  .results-table th{
+    background:var(--brass);color:var(--ink);
+    font-family:Georgia,serif;font-weight:700;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:0.5px;
+    padding:10px 12px;border:none;border-bottom:2px solid var(--brass-2);
+  }
+  .results-table th:first-child{border-top-left-radius:10px;}
+  .results-table th:last-child{border-top-right-radius:10px;}
+  .results-table td, .results-table th{padding:9px 12px;font-size:13px;}
+  .results-table td{border-bottom:1px solid var(--line);background:#fff;}
+  .results-table tbody tr:nth-child(even) td{background:rgba(216,200,150,.12);}
+  .results-table tr:last-child td{border-bottom:none;}
+  .results-table .num{text-align:center;font-variant-numeric:tabular-nums;}
+  .results-table td strong,.results-table td .num strong{color:var(--ink);}
+  .grade-A{color:var(--forest);}
+  .grade-B{color:var(--ink);}
+  .grade-C{color:var(--brass);}
+  .grade-D{color:var(--brass-2);}
+  .grade-E{color:var(--stamp);}
+  .grade-F{color:var(--stamp);}
+  .results-table .grade-A,.results-table .grade-B,.results-table .grade-C,
+  .results-table .grade-D,.results-table .grade-E,.results-table .grade-F,
+  .psychometric-table .grade-A,.psychometric-table .grade-B,.psychometric-table .grade-C,
+  .psychometric-table .grade-D,.psychometric-table .grade-E{font-weight:700;}
+
+    /* ---- Summary block ---- */
+  .summary-block{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:12px;margin:20px 0;
+  }
+  .summary-item{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;text-align:center;
+  }
+  .summary-item .num{
+    font-family:Georgia,'Times New Roman',serif;font-size:22px;
+  }
+  .summary-item .label{
+    font-size:11.5px;text-transform:uppercase;letter-spacing:0.4px;color:var(--muted);margin-top:2px;
+  }
+  .summary-item.total .num{color:var(--ink);}
+  .summary-item.average .num{color:var(--brass);}
+  .summary-item.position .num{color:var(--forest);}
+  .summary-item.subjects .num{color:var(--ink-2);}
+  .summary-item.classavg .num{color:var(--forest);}
+
+  /* ---- Psychomotor / affective domain ---- */
+  .section-heading{
+    font-family:Georgia,'Times New Roman',serif;font-size:14px;font-weight:700;
+    color:var(--ink-2);margin:22px 0 8px;
+  }
+  .psychometric-table{
+    width:100%;border-collapse:separate;border-spacing:0;
+    border-radius:10px;overflow:hidden;
+    border:1px solid var(--line);background:#fff;margin:0 0 6px;
+  }
+  .psychometric-table thead tr{background:var(--ink);}
+  .psychometric-table th{
+    background:var(--ink);color:#fff;
+    font-family:Georgia,serif;font-weight:700;font-size:11.5px;
+    text-transform:uppercase;letter-spacing:0.5px;
+    padding:9px 12px;border:none;border-bottom:2px solid var(--ink-2);
+  }
+  .psychometric-table th:first-child{border-top-left-radius:10px;}
+  .psychometric-table th:last-child{border-top-right-radius:10px;}
+  .psychometric-table td, .psychometric-table th{padding:9px 12px;font-size:13px;}
+  .psychometric-table td{border-bottom:1px solid var(--line);background:#fff;}
+  .psychometric-table tr:last-child td{border-bottom:none;}
+  .psycho-legend{
+    display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:8px;
+  }
+  .psycho-legend span{display:inline-flex;align-items:center;gap:4px;}
+  .psycho-legend strong{color:var(--ink);}
+
+  /* ---- Footer: comments + signatures ---- */
+  .report-footer{border-top:2px solid var(--brass);padding-top:18px;margin-top:20px;}
+  .comment-block{margin-bottom:16px;}
+  .comment-label{
+    font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin-bottom:4px;
+  }
+  .comment-box{
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:11px 14px;font-size:12.8px;line-height:1.5;color:var(--ink-text);
+    font-family:Georgia,serif;
+  }
+  .signature-row{display:flex;justify-content:space-between;gap:14px;margin-top:16px;flex-wrap:wrap;}
+  .signature-line{flex:1;min-width:120px;text-align:center;}
+  .sig-underline{
+    border-bottom:1px solid var(--ink);width:150px;height:1px;margin:38px auto 6px;
+  }
+  .sig-label{font-size:12.5px;font-weight:600;color:var(--ink);}
+  .sig-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+
+  /* ---- Print: clean PDF, no browser chrome ---- */
   @media print{
-    body{background:#fff;}
-    .topbar, .tabs, footer.notice, .no-print{display:none !important;}
-    .stage{background:#fff; margin:0; padding:0; border-radius:0;}
+    body{background:#fff;margin:0;padding:0;-webkit-print-color-adjust:exact;color-adjust:exact;}
+    .topbar,.tabs,footer.notice,.no-print,.toolbar{display:none !important;}
+    .stage{background:#fff;margin:0;padding:0;border-radius:0;}
+    .result-sheet{background:#fff;border:none;border-radius:0;padding:0;margin:0;}
     #view-parent{display:block !important;}
     .view:not(#view-parent){display:none !important;}
+    .psychometric-table thead tr{background:none !important;}
+    .psychometric-table th{background:none !important;color:var(--ink) !important;border-bottom:2px solid var(--ink) !important;}
   }
 
   @media (max-width: 640px){
@@ -166,7 +327,7 @@
 <header class="topbar">
   <div class="crest">GW</div>
   <div class="brand-text">
-    <div class="school-name">Greenwood International School</div>
+    <div class="school-name">Australian International Standard School</div>
     <div class="school-sub">Result Portal · 2025/2026 Session · First Term</div>
   </div>
 </header>
@@ -234,23 +395,69 @@ const students = [
   {id:'GWS/26/005', name:'Blessing Nwosu'},
 ];
 
+const schoolInfo = {
+  name:'Australian International Standard School',
+  address:'No. 15 Greenwood Avenue, G.R.A., Ikeja, Lagos, Nigeria',
+  contact:'Tel: +234 1 271 0044 | Email: info@greenwood.edu.ng | www.greenwood.edu.ng',
+  session:'2025/2026 Academic Session',
+  term:'First Term',
+  class:'JSS 2 (Blue)'
+};
+
+const psychoTraits = ['Punctuality','Neatness','Teamwork','Handwriting','Homework','Participation','Initiative'];
+
+const behavior = {
+  'GWS/26/001': {Punctuality:'A',Neatness:'B',Teamwork:'A',Handwriting:'B',Homework:'A',Participation:'B',Initiative:'A'},
+  'GWS/26/002': {Punctuality:'B',Neatness:'B',Teamwork:'C',Handwriting:'C',Homework:'B',Participation:'B',Initiative:'B'},
+  'GWS/26/003': {Punctuality:'A',Neatness:'A',Teamwork:'A',Handwriting:'A',Homework:'A',Participation:'A',Initiative:'A'},
+  'GWS/26/004': {Punctuality:'C',Neatness:'D',Teamwork:'D',Handwriting:'C',Homework:'D',Participation:'C',Initiative:'C'},
+  'GWS/26/005': {Punctuality:'B',Neatness:'B',Teamwork:'B',Handwriting:'B',Homework:'B',Participation:'B',Initiative:'B'}
+};
+
+const comments = {
+  'GWS/26/001': {
+    teacher:"Chiamaka is a conscientious student who consistently produces quality work. She participates actively and supports her classmates collaboratively.",
+    principal:"Chiamaka has maintained a strong academic standard this term. Keep up the excellent effort."
+  },
+  'GWS/26/002': {
+    teacher:"Tunde is a steady worker who meets most expectations. Regular revision will help him raise his scores further.",
+    principal:"Tunde has shown good conduct this term. Continued diligence will bring further gains."
+  },
+  'GWS/26/003': {
+    teacher:"Amina leads the class in almost every area. She is a role model to her peers and consistently excels.",
+    principal:"Amina's results reflect diligence and natural ability. A proud representative of the school."
+  },
+  'GWS/26/004': {
+    teacher:"David needs to improve his attendance and submit assignments more regularly. Extra support has been offered.",
+    principal:"David must raise his commitment to studies. A parent-teacher meeting is advised."
+  },
+  'GWS/26/005': {
+    teacher:"Blessing is a polite and reliable student who contributes well in groups. She should aim higher in assessments.",
+    principal:"Blessing is making reasonable progress. Encourage her to maintain focus."
+  }
+};
+
 const subjects = [
   {name:'Mathematics', teacher:'Mrs. Adeyemi', submitted:true},
   {name:'English Language', teacher:'Mr. Okonkwo', submitted:true},
-  {name:'Basic Science', teacher:'Mrs. Ibe', submitted:false},
-  {name:'Social Studies', teacher:'Mr. Balogun', submitted:false},
+  {name:'Basic Science', teacher:'Mrs. Ibe', submitted:true},
+  {name:'Social Studies', teacher:'Mr. Balogun', submitted:true},
+  {name:'French', teacher:'Ms. Dupont', submitted:true},
+  {name:'Physical Education', teacher:'Mr. Okafor', submitted:true},
+  {name:'Computer Science', teacher:'Mrs. Nwosu', submitted:false},
+  {name:'Art', teacher:'Mr. Dada', submitted:false},
 ];
 
 const scores = {
-  'GWS/26/001': { 'Mathematics':{ca1:18,ca2:17,exam:52}, 'English Language':{ca1:16,ca2:15,exam:48} },
-  'GWS/26/002': { 'Mathematics':{ca1:14,ca2:16,exam:45}, 'English Language':{ca1:17,ca2:18,exam:55} },
-  'GWS/26/003': { 'Mathematics':{ca1:19,ca2:20,exam:58}, 'English Language':{ca1:15,ca2:14,exam:50} },
-  'GWS/26/004': { 'Mathematics':{ca1:12,ca2:13,exam:38}, 'English Language':{ca1:13,ca2:12,exam:40} },
-  'GWS/26/005': { 'Mathematics':{ca1:17,ca2:16,exam:49}, 'English Language':{ca1:18,ca2:17,exam:53} },
+  'GWS/26/001': { 'Mathematics':{ca1:18,ca2:17,exam:51}, 'English Language':{ca1:16,ca2:14,exam:50}, 'Basic Science':{ca1:18,ca2:15,exam:49}, 'Social Studies':{ca1:15,ca2:15,exam:40}, 'French':{ca1:16,ca2:14,exam:36}, 'Physical Education':{ca1:14,ca2:14,exam:40} },
+  'GWS/26/002': { 'Mathematics':{ca1:14,ca2:14,exam:40}, 'English Language':{ca1:14,ca2:12,exam:40}, 'Basic Science':{ca1:12,ca2:8,exam:40}, 'Social Studies':{ca1:12,ca2:8,exam:38}, 'French':{ca1:10,ca2:12,exam:30}, 'Physical Education':{ca1:10,ca2:12,exam:34} },
+  'GWS/26/003': { 'Mathematics':{ca1:20,ca2:19,exam:53}, 'English Language':{ca1:18,ca2:20,exam:50}, 'Basic Science':{ca1:18,ca2:17,exam:50}, 'Social Studies':{ca1:17,ca2:15,exam:50}, 'French':{ca1:16,ca2:15,exam:47}, 'Physical Education':{ca1:14,ca2:14,exam:57} },
+    'GWS/26/004': { 'Mathematics':{ca1:14,ca2:12,exam:29}, 'English Language':{ca1:14,ca2:12,exam:32}, 'Basic Science':{ca1:10,ca2:10,exam:28}, 'Social Studies':{ca1:10,ca2:8,exam:27}, 'French':{ca1:10,ca2:10,exam:24}, 'Physical Education':{ca1:10,ca2:8,exam:20} },
+  'GWS/26/005': { 'Mathematics':{ca1:16,ca2:14,exam:50}, 'English Language':{ca1:18,ca2:16,exam:50}, 'Basic Science':{ca1:16,ca2:14,exam:48}, 'Social Studies':{ca1:14,ca2:14,exam:44}, 'French':{ca1:14,ca2:12,exam:40}, 'Physical Education':{ca1:14,ca2:12,exam:48} }
 };
 
-let published = false;
-let currentSubject = subjects[2].name; // start on a pending subject so live entry can be demoed
+let published = true;
+let currentSubject = subjects.find(s=>!s.submitted).name || subjects[0].name; // start on a pending subject so live entry can be demoed
 
 function total(s){ return (s.ca1||0)+(s.ca2||0)+(s.exam||0); }
 function gradeFor(t){
@@ -260,6 +467,23 @@ function gradeFor(t){
   if(t>=45) return 'D';
   if(t>=40) return 'E';
   return 'F';
+}
+function remarkFor(t){
+  if(t>=70) return 'Excellent';
+  if(t>=60) return 'Very Good';
+  if(t>=50) return 'Good';
+  if(t>=45) return 'Fair';
+  if(t>=40) return 'Needs Improvement';
+  return 'Fail';
+}
+function ordinal(n){
+  const v=n%100;let s='th';
+  if(v>10&&v<20){s='th';}else if(v%10===1){s='st';}else if(v%10===2){s='nd';}else if(v%10===3){s='rd';}
+  return s;
+}
+function classAverageOverall(){
+  const ranked=classAverages().filter(r=>r.avg>0);
+  return ranked.length?ranked.reduce((a,r)=>a+r.avg,0)/ranked.length:0;
 }
 
 document.querySelectorAll('.tab').forEach(tab=>{
@@ -373,27 +597,117 @@ function renderParent(){
   const rankings = classAverages();
   const position = rankings.findIndex(r=>r.id===sid)+1;
   const myAvg = rankings.find(r=>r.id===sid).avg;
+  const classAvg = classAverageOverall();
+  const submitted = subjects.filter(s=>s.submitted);
+  let grandTotal = 0;
+  submitted.forEach(s=>{
+    const r = rec[s.name]||{ca1:0,ca2:0,exam:0};
+    grandTotal += total(r);
+  });
 
   container.innerHTML = `
-    <div class="reportcard-head">
-      <div>
-        <div style="font-family:Georgia,serif; font-size:18px;">${st.name}</div>
-        <div class="note">${st.id} · JSS2 · First Term 2025/2026</div>
+    <div class="result-sheet">
+      <header class="result-header">
+        <div class="row">
+          <div class="crest">GW</div>
+          <div class="school-block">
+            <div class="school-name">${schoolInfo.name}</div>
+            <div class="school-sub">${schoolInfo.address} &middot; ${schoolInfo.contact}</div>
+          </div>
+        </div>
+        <div class="result-title">TERMLY RESULT SHEET</div>
+      </header>
+
+      <div class="student-info-bar">
+        <div class="info-group"><span class="label">Student Name</span><span class="value">${st.name}</span></div>
+        <div class="info-group"><span class="label">Admission No.</span><span class="value">${st.id}</span></div>
+        <div class="info-group"><span class="label">Class</span><span class="value">${schoolInfo.class}</span></div>
+        <div class="info-group"><span class="label">Term</span><span class="value">${schoolInfo.term}</span></div>
+        <div class="info-group"><span class="label">Session</span><span class="value">${schoolInfo.session}</span></div>
       </div>
-      <div class="avg">
-        <div class="big">${myAvg.toFixed(1)}</div>
-        <div class="note">Average · Position ${position} of ${students.length}</div>
+
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Subject</th><th class="num">1st CA</th><th class="num">2nd CA</th>
+            <th class="num">Exam</th><th class="num">Total</th><th class="num">Grade</th>
+            <th>Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${submitted.map(s=>{
+            const r = rec[s.name]||{ca1:0,ca2:0,exam:0};
+            const t = total(r);
+            const g = gradeFor(t);
+            return `<tr>
+              <td>${s.name}</td>
+              <td class="num">${r.ca1}</td>
+              <td class="num">${r.ca2}</td>
+              <td class="num">${r.exam}</td>
+              <td class="num"><strong>${t}</strong></td>
+              <td class="num grade-${g}">${g}</td>
+              <td>${remarkFor(t)}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+
+      <div class="summary-block">
+        <div class="summary-item total"><div class="num">${grandTotal}</div><div class="label">Total Score</div></div>
+        <div class="summary-item average"><div class="num">${myAvg.toFixed(1)}</div><div class="label">Average</div></div>
+        <div class="summary-item position"><div class="num">${position}${ordinal(position)}</div><div class="label">Class Position</div></div>
+        <div class="summary-item subjects"><div class="num">${submitted.length}</div><div class="label">No. of Subjects</div></div>
+        <div class="summary-item classavg"><div class="num">${classAvg.toFixed(1)}</div><div class="label">Class Average</div></div>
+      </div>
+
+      <div class="section-heading">Psychomotor / Affective Domain</div>
+      <table class="psychometric-table">
+        <thead>
+          <tr><th>Trait</th><th class="num">Rating (A&ndash;E)</th></tr>
+        </thead>
+        <tbody>
+          ${psychoTraits.map(trait=>{
+            const r = (behavior[sid]||{})[trait] || 'E';
+            return `<tr><td>${trait}</td><td class="num grade-${r}">${r}</td></tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+      <div class="psycho-legend">
+        <span><strong>A</strong> Excellent</span>
+        <span><strong>B</strong> Very Good</span>
+        <span><strong>C</strong> Good</span>
+        <span><strong>D</strong> Fair</span>
+        <span><strong>E</strong> Needs Improvement</span>
+      </div>
+
+      <div class="report-footer">
+        <div class="comment-block">
+          <div class="comment-label">Teacher's Comment</div>
+          <div class="comment-box">${(comments[sid]&&comments[sid].teacher)||''}</div>
+        </div>
+        <div class="comment-block">
+          <div class="comment-label">Principal's Comment</div>
+          <div class="comment-box">${(comments[sid]&&comments[sid].principal)||''}</div>
+        </div>
+        <div class="signature-row">
+          <div class="signature-line">
+            <div class="sig-underline"></div>
+            <div class="sig-label">Class Teacher</div>
+            <div class="sig-sub">Signature &amp; Date</div>
+          </div>
+          <div class="signature-line">
+            <div class="sig-underline"></div>
+            <div class="sig-label">Principal</div>
+            <div class="sig-sub">Signature &amp; Date</div>
+          </div>
+          <div class="signature-line">
+            <div class="sig-underline"></div>
+            <div class="sig-label">Head of Studies</div>
+            <div class="sig-sub">Signature &amp; Date</div>
+          </div>
+        </div>
       </div>
     </div>
-    <table>
-      <tr><th>Subject</th><th class="num">CA1</th><th class="num">CA2</th><th class="num">Exam</th><th class="num">Total</th><th class="num">Grade</th></tr>
-      ${subjects.map(s=>{
-        if(!s.submitted) return `<tr><td>${s.name}</td><td colspan="5" class="note">Not yet submitted</td></tr>`;
-        const r = rec[s.name]||{ca1:0,ca2:0,exam:0};
-        const t = total(r);
-        return `<tr><td>${s.name}</td><td class="num">${r.ca1}</td><td class="num">${r.ca2}</td><td class="num">${r.exam}</td><td class="num">${t}</td><td class="num">${gradeFor(t)}</td></tr>`;
-      }).join('')}
-    </table>
   `;
 }
 
