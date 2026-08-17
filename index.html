@@ -146,7 +146,7 @@
     text-align:center; color:#8592AC; font-size:12px; padding:16px; letter-spacing:0.2px;
   }
 
-    @page{margin:1.5cm;}
+    @page{size:A4;margin:10mm 9mm;}
 
   /* ===== Termly Result Sheet (Parent / Student view) ===== */
   .result-sheet{
@@ -320,6 +320,131 @@
     .stage{padding:20px;}
     .tabs{padding:0 12px;}
   }
+/* =========================================================
+     Termly Result Sheet — replica of AISS report card
+     (solid green #00B050 headers, yellow #FFFF00 category rows,
+      thin black grid borders, classic spreadsheet look)
+     ========================================================= */
+  .result-sheet{
+    font-family:Cambria, Georgia, 'Times New Roman', serif;
+    color:#000;background:#fff;border:none;border-radius:0;box-shadow:none;
+    padding:2px;margin:0 auto;max-width:940px;font-size:11pt;line-height:1.25;
+    -webkit-print-color-adjust:exact;color-adjust:exact;
+  }
+  .result-sheet *{box-sizing:border-box;}
+  .result-sheet table{border-collapse:collapse;width:100%;}
+  .num{text-align:center;}
+
+  /* ---- Letterhead: crest + school identity + student photo box ---- */
+  .sheet-letterhead{display:flex;align-items:stretch;justify-content:space-between;gap:14px;border-bottom:2.5px solid #000;padding:4px 2px 8px;}
+  .sheet-brand{flex:1;text-align:center;padding:0 6px;}
+  .sheet-crest{width:76px;height:76px;border:2px solid #000;border-radius:50%;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;letter-spacing:.5px;}
+  .sheet-school-name{font-size:23px;font-weight:700;letter-spacing:1.5px;line-height:1.08;text-transform:uppercase;}
+  .sheet-school-motto{font-size:11.5px;font-weight:700;letter-spacing:.5px;margin-top:3px;text-transform:uppercase;}
+  .sheet-school-addr{font-size:10.5px;margin-top:3px;line-height:1.35;}
+  .sheet-photo{width:96px;height:120px;border:2px solid #000;flex:none;display:flex;align-items:center;justify-content:center;text-align:center;font-size:9.5px;letter-spacing:.3px;text-transform:uppercase;color:#000;}
+
+  /* ---- Title ---- */
+  .sheet-title{text-align:center;font-size:16pt;font-weight:700;letter-spacing:1px;border:2px solid #000;padding:7px 8px;margin:12px 0 2px;}
+
+  /* ---- Student info bar (label/value grid) ---- */
+  .sheet-info{width:100%;border-collapse:collapse;margin:8px 0 10px;}
+  .sheet-info td{border:1px solid #000;padding:5px 9px;vertical-align:top;font-size:11pt;}
+  .sheet-info td.k{font-weight:700;width:20%;white-space:nowrap;}
+  .sheet-info td.v{width:30%;}
+  .sheet-info td.name-cell{font-weight:700;font-size:16pt;}
+
+  /* ---- Results table ---- */
+  .sheet-results{width:100%;border-collapse:collapse;margin:4px 0;}
+  .sheet-results th,.sheet-results td{border:1px solid #000;padding:5px 6px;font-size:11pt;vertical-align:middle;background:#fff;}
+  .sheet-results thead tr.head th{background:#00B050;color:#000;font-weight:700;text-align:center;}
+  .sheet-results thead tr.obtain th{background:#fff;font-weight:400;text-align:center;}
+  .sheet-results td.l{text-align:left;}
+  .sheet-results td.n{text-align:center;font-variant-numeric:tabular-nums;}
+  .sheet-results td.subj-total{font-weight:700;text-align:center;}
+  .sheet-results tr.shade td{background:#F2F2F2;}
+  .sheet-results tr.cat td{background:#FFFF00;color:#000;font-weight:700;text-align:left;padding:6px 9px;letter-spacing:.4px;}
+  .sheet-results tr.gtotal td{background:#fff;font-weight:700;font-size:16pt;}
+  .sheet-results tr.gtotal td.gt-l{text-align:right;}
+  /* ---- Attendance + marks sub-blocks ---- */
+  .sheet-blocks{display:flex;gap:10px;margin:12px 0;flex-wrap:wrap;}
+  .sheet-block{flex:1;min-width:230px;border:1px solid #000;}
+  .sheet-block .bt{background:#00B050;color:#000;font-weight:700;text-align:center;padding:6px 8px;font-size:12pt;border-bottom:1px solid #000;}
+  .sheet-block table{width:100%;border-collapse:collapse;}
+  .sheet-block td{border:1px solid #000;padding:5px 9px;font-size:11pt;background:#fff;}
+  .sheet-block td.k{font-weight:700;}
+
+  /* ---- Legend ---- */
+  .sheet-legend{border:1px solid #000;margin:12px 0;}
+  .sheet-legend .bt{background:#00B050;color:#000;font-weight:700;text-align:center;padding:6px 8px;font-size:12pt;border-bottom:1px solid #000;}
+  .sheet-legend .body{padding:6px 10px;font-size:11pt;}
+
+  /* ---- Psychomotor + affective side-by-side ---- */
+  .sheet-domains{display:flex;gap:10px;margin:12px 0;flex-wrap:wrap;}
+  .sheet-domain{flex:1;min-width:270px;border:1px solid #000;}
+  .sheet-domain .dt{background:#00B050;color:#000;font-weight:700;text-align:center;padding:6px 8px;font-size:12pt;border-bottom:1px solid #000;}
+  .sheet-domain table{width:100%;border-collapse:collapse;}
+  .sheet-domain td{border:1px solid #000;padding:4px 8px;font-size:11pt;background:#fff;}
+  .sheet-domain tr:nth-child(even) td{background:#F2F2F2;}
+  .sheet-domain td.rt{text-align:center;font-weight:700;}
+
+  /* ---- Footer: comments / resumption / signatures ---- */
+  .sheet-comment{margin:10px 0;border:1px solid #000;}
+  .sheet-comment .ct{background:#00B050;color:#000;font-weight:700;padding:6px 10px;font-size:16pt;border-bottom:1px solid #000;}
+  .sheet-comment .cb{padding:8px 10px;min-height:46px;font-size:11pt;font-style:italic;background:#fff;}
+  .sheet-resumption{display:flex;justify-content:space-between;gap:12px;margin:8px 0;font-size:12pt;flex-wrap:wrap;}
+  .sheet-resumption span{font-weight:700;}
+  .sheet-signatures{display:flex;justify-content:space-between;gap:16px;margin-top:44px;flex-wrap:wrap;align-items:flex-end;}
+  .sheet-sig{text-align:center;flex:1;min-width:150px;}
+  .sheet-sig .line{border-top:1px solid #000;margin-top:52px;padding-top:5px;font-size:11pt;font-weight:700;}
+  .sheet-sig .sub{font-size:10pt;margin-top:2px;}
+  .sheet-stamp{width:118px;height:118px;border:2px dashed #555;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:700;color:#444;letter-spacing:.3px;flex:none;}
+  .sheet-stamp .inner{transform:rotate(-6deg);}
+
+  @media print{
+    .sheet-blocks,.sheet-domains,.sheet-signatures,.sheet-domain,.sheet-block,.sheet-comment{break-inside:avoid;}
+    .sheet-results tr{break-inside:avoid;}
+  }
+  /* ---- Comment & signature/stamp entry panels ---- */
+  .panel{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .panel-title{font-family:Georgia,serif;font-size:16px;font-weight:700;color:var(--ink);margin:0 0 12px;}
+  .panel textarea{width:100%;box-sizing:border-box;font-family:Cambria,Georgia,serif;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;resize:vertical;min-height:64px;}
+  .sign-upload{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+  .sign-preview,.stamp-preview{margin-top:8px;border:1px dashed var(--line);border-radius:8px;padding:8px;min-width:120px;min-height:44px;background:#FBF9F3;}
+  .sign-preview img{height:46px;object-fit:contain;}
+  .stamp-preview img{height:64px;object-fit:contain;}
+  .muted{color:var(--muted);font-size:12px;}
+
+  /* Report card comment + signature/stamp images */
+  .sheet-comment .cb-sig{margin-top:6px;text-align:right;padding-right:10px;}
+  .sheet-comment .cb-sig img{height:40px;object-fit:contain;opacity:.92;}
+  .sheet-sig{position:relative;}
+  .sheet-sig .sig-img{height:42px;max-width:160px;object-fit:contain;display:block;margin:0 auto;}
+  .sheet-sig.has-sig .line{margin-top:6px;}
+  .sheet-stamp img{width:100%;height:100%;object-fit:contain;transform:rotate(-6deg);}
+  .bar-label{font-size:13.5px;color:var(--muted);}
+  .table-caption{font-family:Georgia,serif;font-size:15px;font-weight:700;color:var(--ink);margin:18px 0 8px;}
+  /* Class Teacher score table (per-student, all subjects) */
+  #teacher-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);}
+  #teacher-table th,#teacher-table td{border:1px solid var(--line);padding:8px 10px;font-size:13px;text-align:left;color:var(--ink-text);}
+  #teacher-table th{background:var(--parchment-2);font-family:Georgia,serif;font-weight:600;}
+  #teacher-table tr.cat td{background:#FFFF00;color:#000;font-weight:700;letter-spacing:.4px;}
+  #teacher-table tr.shade2 td{background:#F2F2F2;}
+  #teacher-table tr.gtotal td{font-weight:700;background:#fff;font-size:15px;}
+  #teacher-table tr.gtotal td.gt-l{text-align:right;}
+  #teacher-table td.num{text-align:center;}
+  #teacher-table input{width:64px;border:1px solid var(--line);border-radius:6px;padding:5px 6px;text-align:center;font-size:13px;background:#fff;color:var(--ink-text);}
+  #teacher-table input:focus{outline:2px solid var(--brass);outline-offset:1px;}
+  /* Admin students table */
+  #admin-students{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);}
+  #admin-students th,#admin-students td{border-bottom:1px solid var(--line);padding:10px 12px;font-size:13.5px;text-align:left;color:var(--ink-text);}
+  #admin-students th{background:var(--parchment-2);font-family:Georgia,serif;font-weight:600;}
+  #admin-students tbody tr:hover{background:var(--forest-bg);}
+  #admin-students td.num{text-align:center;}
+  /* Admin report preview */
+  .report-preview-wrap{margin:20px 0;padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:12px;}
+  .report-preview-wrap .preview-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
+  .report-preview-wrap .preview-head h3{margin:0;font-family:Georgia,serif;font-size:16px;color:var(--ink);}
 </style>
 </head>
 <body>
@@ -328,7 +453,7 @@
   <div class="crest">GW</div>
   <div class="brand-text">
     <div class="school-name">Australian International Standard School</div>
-    <div class="school-sub">Result Portal · 2025/2026 Session · First Term</div>
+    <div class="school-sub">Result Portal · 2025/2026 Session · Third Term</div>
   </div>
 </header>
 
@@ -341,34 +466,56 @@
 <main class="stage">
 
   <section id="view-admin" class="view active">
-    <h2 class="view-title">Exam Office Overview</h2>
-    <p class="view-sub">Track submissions across every subject, then publish once results are ready.</p>
-    <div class="cards" id="admin-cards"></div>
-    <table id="admin-table"></table>
-    <div class="publish-banner">
-      <div>
-        <strong id="publish-status-text">Not yet published</strong>
-        <div class="note" id="publish-status-note">Parents and students can't see results until you publish.</div>
-      </div>
+    <h2 class="view-title">Exam Office — Result Management</h2>
+    <p class="view-sub">Select a class, review results, add the Head-Teacher's remarks &amp; stamp, then publish.</p>
+    <div class="toolbar">
+      <label for="admin-class" style="font-size:13.5px; color:var(--muted);">Class</label>
+      <select id="admin-class"></select>
+      <span id="publish-status" class="pill pending"></span>
       <button class="btn primary" id="publish-btn">Publish term results</button>
+    </div>
+    <div class="note">Publishing makes results visible to parents/students. Click “View Report” to preview a result, then apply the Head-Teacher's remarks and the school stamp below.</div>
+    <h3 class="table-caption">Students — JSS 2 (Blue)</h3>
+    <table id="admin-students"></table>
+
+    <div id="admin-report-preview" class="report-preview-wrap" hidden></div>
+
+    <div class="panel admin-headpanel">
+      <h3 class="panel-title">Head-Teacher's Comments &amp; School Stamp</h3>
+      <div class="toolbar">
+        <label for="ht-student" style="font-size:13.5px; color:var(--muted);">Student</label>
+        <select id="ht-student"></select>
+      </div>
+      <textarea id="ht-comment" rows="3" placeholder="Write the head-teacher's comment for the selected student…"></textarea>
+      <div class="sign-upload">
+        <label class="btn gold">Upload school stamp<input type="file" id="ht-stamp" accept="image/*" hidden></label>
+        <span id="ht-stamp-name" class="muted"></span>
+        <button class="btn" id="ht-stamp-clear" hidden>Remove stamp</button>
+      </div>
+      <div id="ht-stamp-preview" class="stamp-preview"></div>
     </div>
   </section>
 
   <section id="view-teacher" class="view">
-    <h2 class="view-title">Teacher — Score Entry</h2>
-    <p class="view-sub">Enter continuous assessment and exam scores. Totals are calculated as you type.</p>
+    <h2 class="view-title">Class Teacher — Score Entry</h2>
+    <p class="view-sub"><strong>Victoria Favour</strong> · Class Teacher · JSS 2 Blue · Third Term</p>
     <div class="toolbar">
-      <label for="subject-select" style="font-size:13.5px; color:var(--muted);">Subject</label>
-      <select id="subject-select"></select>
-      <span id="subject-status"></span>
+      <label for="tc-student" style="font-size:13.5px; color:var(--muted);">Student</label>
+      <select id="tc-student"></select>
+      <span class="note" id="teacher-selected-student"></span>
     </div>
+    <div class="note">Scores: CA1 (20) + CA2 (10) + CA3 (10) + Exam (60) = Total (100). Totals &amp; grades update as you type.</div>
     <table id="teacher-table"></table>
-    <div class="publish-banner">
-      <div>
-        <strong>JSS2 · <span id="teacher-subject-name"></span></strong>
-        <div class="note">CA1 (20) + CA2 (20) + Exam (60) = Total (100). Weights are configurable per subject.</div>
+
+    <div class="panel teacher-comment-panel">
+      <h3 class="panel-title">Teacher's Comments &amp; Signature</h3>
+      <textarea id="tc-comment" rows="3" placeholder="Write the teacher's comment for the selected student…"></textarea>
+      <div class="sign-upload">
+        <label class="btn gold">Upload signature<input type="file" id="tc-signature" accept="image/*" hidden></label>
+        <span id="tc-sign-name" class="muted"></span>
+        <button class="btn" id="tc-sign-clear" hidden>Remove signature</button>
       </div>
-      <button class="btn primary" id="submit-scores-btn">Submit scores</button>
+      <div id="tc-sign-preview" class="sign-preview"></div>
     </div>
   </section>
 
@@ -388,78 +535,183 @@
 
 <script>
 const students = [
-  {id:'GWS/26/001', name:'Chiamaka Okafor'},
-  {id:'GWS/26/002', name:'Tunde Bakare'},
-  {id:'GWS/26/003', name:'Amina Yusuf'},
-  {id:'GWS/26/004', name:'David Eze'},
-  {id:'GWS/26/005', name:'Blessing Nwosu'},
+  {id:'GWS/26/001', name:'Chiamaka Okafor', dob:'15 March 2012'},
+  {id:'GWS/26/002', name:'Tunde Bakare', dob:'02 July 2011'},
+  {id:'GWS/26/003', name:'Amina Yusuf', dob:'21 November 2011'},
+  {id:'GWS/26/004', name:'David Eze', dob:'09 January 2012'},
+  {id:'GWS/26/005', name:'Blessing Nwosu', dob:'28 May 2011'},
 ];
 
 const schoolInfo = {
-  name:'Australian International Standard School',
+  name:'AUSTRALIAN INTERNATIONAL STANDARD SCHOOL',
+  motto:'Learning · Excellence · Discipline',
   address:'No. 15 Greenwood Avenue, G.R.A., Ikeja, Lagos, Nigeria',
-  contact:'Tel: +234 1 271 0044 | Email: info@greenwood.edu.ng | www.greenwood.edu.ng',
+  contact:'Tel: +234 1 271 0044 | Email: info@aiss.edu.ng | www.aiss.edu.ng',
   session:'2025/2026 Academic Session',
-  term:'First Term',
-  class:'JSS 2 (Blue)'
+  term:'Third Term',
+  termNo:3,
+  class:'JSS 2 (Blue)',
+  nextResumption:'Monday, 7th September, 2026'
 };
 
-const psychoTraits = ['Punctuality','Neatness','Teamwork','Handwriting','Homework','Participation','Initiative'];
+const psychoTraits = ['Punctuality','Neatness','Handwriting','Sports & Games','Dexterity (Handwork)','Verbal Fluency'];
+const affectiveTraits = ['Politeness','Honesty','Obedience','Cooperation','Self-Control','Leadership','Respect for Others'];
 
-const behavior = {
-  'GWS/26/001': {Punctuality:'A',Neatness:'B',Teamwork:'A',Handwriting:'B',Homework:'A',Participation:'B',Initiative:'A'},
-  'GWS/26/002': {Punctuality:'B',Neatness:'B',Teamwork:'C',Handwriting:'C',Homework:'B',Participation:'B',Initiative:'B'},
-  'GWS/26/003': {Punctuality:'A',Neatness:'A',Teamwork:'A',Handwriting:'A',Homework:'A',Participation:'A',Initiative:'A'},
-  'GWS/26/004': {Punctuality:'C',Neatness:'D',Teamwork:'D',Handwriting:'C',Homework:'D',Participation:'C',Initiative:'C'},
-  'GWS/26/005': {Punctuality:'B',Neatness:'B',Teamwork:'B',Handwriting:'B',Homework:'B',Participation:'B',Initiative:'B'}
+const psychomotor = {
+  'GWS/26/001': {Punctuality:'E',Neatness:'E',Handwriting:'M','Sports & Games':'E','Dexterity (Handwork)':'E','Verbal Fluency':'E'},
+  'GWS/26/002': {Punctuality:'M',Neatness:'M',Handwriting:'M','Sports & Games':'A','Dexterity (Handwork)':'A','Verbal Fluency':'M'},
+  'GWS/26/003': {Punctuality:'E',Neatness:'E',Handwriting:'M','Sports & Games':'E','Dexterity (Handwork)':'E','Verbal Fluency':'E'},
+  'GWS/26/004': {Punctuality:'M',Neatness:'A',Handwriting:'A','Sports & Games':'B','Dexterity (Handwork)':'A','Verbal Fluency':'A'},
+  'GWS/26/005': {Punctuality:'M',Neatness:'M',Handwriting:'M','Sports & Games':'M','Dexterity (Handwork)':'A','Verbal Fluency':'M'},
+};
+
+const affective = {
+  'GWS/26/001': {Politeness:'E',Honesty:'E',Obedience:'E',Cooperation:'M',SelfControl:'M',Leadership:'E','Respect for Others':'E'},
+  'GWS/26/002': {Politeness:'M',Honesty:'M',Obedience:'M',Cooperation:'M',SelfControl:'A',Leadership:'M','Respect for Others':'M'},
+  'GWS/26/003': {Politeness:'E',Honesty:'E',Obedience:'E',Cooperation:'E',SelfControl:'E',Leadership:'E','Respect for Others':'E'},
+  'GWS/26/004': {Politeness:'M',Honesty:'A',Obedience:'A',Cooperation:'A',SelfControl:'B',Leadership:'A','Respect for Others':'M'},
+  'GWS/26/005': {Politeness:'M',Honesty:'M',Obedience:'M',Cooperation:'A',SelfControl:'M',Leadership:'M','Respect for Others':'M'},
 };
 
 const comments = {
   'GWS/26/001': {
     teacher:"Chiamaka is a conscientious student who consistently produces quality work. She participates actively and supports her classmates collaboratively.",
-    principal:"Chiamaka has maintained a strong academic standard this term. Keep up the excellent effort."
+    headTeacher:"Chiamaka has maintained a strong academic standard this term. Keep up the excellent effort."
   },
   'GWS/26/002': {
     teacher:"Tunde is a steady worker who meets most expectations. Regular revision will help him raise his scores further.",
-    principal:"Tunde has shown good conduct this term. Continued diligence will bring further gains."
+    headTeacher:"Tunde has shown good conduct this term. Continued diligence will bring further gains."
   },
   'GWS/26/003': {
     teacher:"Amina leads the class in almost every area. She is a role model to her peers and consistently excels.",
-    principal:"Amina's results reflect diligence and natural ability. A proud representative of the school."
+    headTeacher:"Amina's results reflect diligence and natural ability. A proud representative of the school."
   },
   'GWS/26/004': {
     teacher:"David needs to improve his attendance and submit assignments more regularly. Extra support has been offered.",
-    principal:"David must raise his commitment to studies. A parent-teacher meeting is advised."
+    headTeacher:"David must raise his commitment to studies. A parent-teacher meeting is advised."
   },
   'GWS/26/005': {
     teacher:"Blessing is a polite and reliable student who contributes well in groups. She should aim higher in assessments.",
-    principal:"Blessing is making reasonable progress. Encourage her to maintain focus."
+    headTeacher:"Blessing is making reasonable progress. Encourage her to maintain focus."
   }
 };
 
-const subjects = [
-  {name:'Mathematics', teacher:'Mrs. Adeyemi', submitted:true},
-  {name:'English Language', teacher:'Mr. Okonkwo', submitted:true},
-  {name:'Basic Science', teacher:'Mrs. Ibe', submitted:true},
-  {name:'Social Studies', teacher:'Mr. Balogun', submitted:true},
-  {name:'French', teacher:'Ms. Dupont', submitted:true},
-  {name:'Physical Education', teacher:'Mr. Okafor', submitted:true},
-  {name:'Computer Science', teacher:'Mrs. Nwosu', submitted:false},
-  {name:'Art', teacher:'Mr. Dada', submitted:false},
+const subjectGroups = [
+  {name:'LITERACY', subs:['English Studies','Literacy / Comprehension','Handwriting']},
+  {name:'ARITHMETICS', subs:['Mathematics','Numeracy']},
+  {name:'GENERAL PAPERS', subs:['Basic Science','Civic Education','Christian Religious Studies','French','Agric Science','Home Economics']},
 ];
+const subjects = subjectGroups.flatMap(g=>g.subs.map(name=>({name, cat:g.name, teacher:'—', submitted:true})));
 
 const scores = {
-  'GWS/26/001': { 'Mathematics':{ca1:18,ca2:17,exam:51}, 'English Language':{ca1:16,ca2:14,exam:50}, 'Basic Science':{ca1:18,ca2:15,exam:49}, 'Social Studies':{ca1:15,ca2:15,exam:40}, 'French':{ca1:16,ca2:14,exam:36}, 'Physical Education':{ca1:14,ca2:14,exam:40} },
-  'GWS/26/002': { 'Mathematics':{ca1:14,ca2:14,exam:40}, 'English Language':{ca1:14,ca2:12,exam:40}, 'Basic Science':{ca1:12,ca2:8,exam:40}, 'Social Studies':{ca1:12,ca2:8,exam:38}, 'French':{ca1:10,ca2:12,exam:30}, 'Physical Education':{ca1:10,ca2:12,exam:34} },
-  'GWS/26/003': { 'Mathematics':{ca1:20,ca2:19,exam:53}, 'English Language':{ca1:18,ca2:20,exam:50}, 'Basic Science':{ca1:18,ca2:17,exam:50}, 'Social Studies':{ca1:17,ca2:15,exam:50}, 'French':{ca1:16,ca2:15,exam:47}, 'Physical Education':{ca1:14,ca2:14,exam:57} },
-    'GWS/26/004': { 'Mathematics':{ca1:14,ca2:12,exam:29}, 'English Language':{ca1:14,ca2:12,exam:32}, 'Basic Science':{ca1:10,ca2:10,exam:28}, 'Social Studies':{ca1:10,ca2:8,exam:27}, 'French':{ca1:10,ca2:10,exam:24}, 'Physical Education':{ca1:10,ca2:8,exam:20} },
-  'GWS/26/005': { 'Mathematics':{ca1:16,ca2:14,exam:50}, 'English Language':{ca1:18,ca2:16,exam:50}, 'Basic Science':{ca1:16,ca2:14,exam:48}, 'Social Studies':{ca1:14,ca2:14,exam:44}, 'French':{ca1:14,ca2:12,exam:40}, 'Physical Education':{ca1:14,ca2:12,exam:48} }
+  'GWS/26/001': {
+    'English Studies':{ca1:19,ca2:9,ca3:9,exam:55,term1:78,term2:82},
+    'Literacy / Comprehension':{ca1:18,ca2:9,ca3:8,exam:54,term1:80,term2:84},
+    'Handwriting':{ca1:17,ca2:8,ca3:8,exam:52,term1:82,term2:85},
+    'Mathematics':{ca1:19,ca2:10,ca3:9,exam:57,term1:86,term2:90},
+    'Numeracy':{ca1:18,ca2:9,ca3:9,exam:56,term1:84,term2:88},
+    'Basic Science':{ca1:19,ca2:9,ca3:9,exam:56,term1:83,term2:86},
+    'Civic Education':{ca1:18,ca2:9,ca3:9,exam:55,term1:85,term2:88},
+    'Christian Religious Studies':{ca1:19,ca2:10,ca3:9,exam:58,term1:88,term2:91},
+    'French':{ca1:18,ca2:9,ca3:8,exam:54,term1:81,term2:85},
+    'Agric Science':{ca1:18,ca2:9,ca3:9,exam:55,term1:85,term2:88},
+    'Home Economics':{ca1:18,ca2:9,ca3:9,exam:55,term1:83,term2:87},
+  },
+  'GWS/26/002': {
+    'English Studies':{ca1:18,ca2:8,ca3:8,exam:50,term1:70,term2:75},
+    'Literacy / Comprehension':{ca1:17,ca2:8,ca3:7,exam:48,term1:68,term2:72},
+    'Handwriting':{ca1:16,ca2:7,ca3:7,exam:46,term1:70,term2:73},
+    'Mathematics':{ca1:18,ca2:9,ca3:8,exam:52,term1:75,term2:78},
+    'Numeracy':{ca1:17,ca2:8,ca3:7,exam:50,term1:73,term2:76},
+    'Basic Science':{ca1:16,ca2:8,ca3:7,exam:48,term1:70,term2:74},
+    'Civic Education':{ca1:17,ca2:8,ca3:8,exam:49,term1:72,term2:75},
+    'Christian Religious Studies':{ca1:18,ca2:8,ca3:8,exam:51,term1:74,term2:77},
+    'French':{ca1:16,ca2:7,ca3:7,exam:45,term1:68,term2:72},
+    'Agric Science':{ca1:16,ca2:8,ca3:7,exam:47,term1:70,term2:73},
+    'Home Economics':{ca1:17,ca2:8,ca3:8,exam:49,term1:71,term2:74},
+  },
+  'GWS/26/003': {
+    'English Studies':{ca1:20,ca2:10,ca3:10,exam:59,term1:90,term2:93},
+    'Literacy / Comprehension':{ca1:19,ca2:10,ca3:9,exam:57,term1:88,term2:91},
+    'Handwriting':{ca1:18,ca2:9,ca3:9,exam:57,term1:90,term2:92},
+    'Mathematics':{ca1:20,ca2:10,ca3:10,exam:60,term1:92,term2:95},
+    'Numeracy':{ca1:19,ca2:9,ca3:9,exam:58,term1:90,term2:93},
+    'Basic Science':{ca1:19,ca2:9,ca3:9,exam:59,term1:89,term2:92},
+    'Civic Education':{ca1:18,ca2:10,ca3:9,exam:58,term1:91,term2:94},
+    'Christian Religious Studies':{ca1:20,ca2:10,ca3:10,exam:60,term1:93,term2:96},
+    'French':{ca1:19,ca2:9,ca3:9,exam:57,term1:89,term2:92},
+    'Agric Science':{ca1:19,ca2:9,ca3:10,exam:58,term1:90,term2:93},
+    'Home Economics':{ca1:19,ca2:9,ca3:9,exam:58,term1:90,term2:93},
+  },
+  'GWS/26/004': {
+    'English Studies':{ca1:15,ca2:7,ca3:6,exam:34,term1:55,term2:58},
+    'Literacy / Comprehension':{ca1:14,ca2:6,ca3:6,exam:32,term1:52,term2:55},
+    'Handwriting':{ca1:13,ca2:6,ca3:5,exam:30,term1:50,term2:53},
+    'Mathematics':{ca1:15,ca2:7,ca3:7,exam:36,term1:58,term2:60},
+    'Numeracy':{ca1:14,ca2:6,ca3:6,exam:33,term1:55,term2:57},
+    'Basic Science':{ca1:14,ca2:6,ca3:6,exam:32,term1:53,term2:56},
+    'Civic Education':{ca1:15,ca2:7,ca3:6,exam:35,term1:56,term2:59},
+    'Christian Religious Studies':{ca1:15,ca2:7,ca3:6,exam:34,term1:55,term2:58},
+    'French':{ca1:13,ca2:6,ca3:5,exam:30,term1:50,term2:52},
+    'Agric Science':{ca1:14,ca2:6,ca3:6,exam:33,term1:54,term2:56},
+    'Home Economics':{ca1:14,ca2:6,ca3:6,exam:33,term1:53,term2:56},
+  },
+  'GWS/26/005': {
+    'English Studies':{ca1:16,ca2:8,ca3:8,exam:52,term1:76,term2:80},
+    'Literacy / Comprehension':{ca1:16,ca2:8,ca3:7,exam:50,term1:74,term2:78},
+    'Handwriting':{ca1:15,ca2:7,ca3:7,exam:48,term1:75,term2:79},
+    'Mathematics':{ca1:17,ca2:8,ca3:8,exam:53,term1:78,term2:82},
+    'Numeracy':{ca1:16,ca2:8,ca3:8,exam:52,term1:76,term2:80},
+    'Basic Science':{ca1:16,ca2:8,ca3:7,exam:50,term1:74,term2:78},
+    'Civic Education':{ca1:16,ca2:8,ca3:8,exam:51,term1:75,term2:79},
+    'Christian Religious Studies':{ca1:17,ca2:8,ca3:8,exam:53,term1:77,term2:81},
+    'French':{ca1:15,ca2:8,ca3:7,exam:49,term1:74,term2:78},
+    'Agric Science':{ca1:16,ca2:8,ca3:7,exam:50,term1:75,term2:79},
+    'Home Economics':{ca1:16,ca2:8,ca3:8,exam:51,term1:74,term2:78},
+  }
 };
 
-let published = true;
-let currentSubject = subjects.find(s=>!s.submitted).name || subjects[0].name; // start on a pending subject so live entry can be demoed
+const attendance = {
+  'GWS/26/001':{opened:183,present:181,absent:2},
+  'GWS/26/002':{opened:183,present:177,absent:6},
+  'GWS/26/003':{opened:183,present:182,absent:1},
+  'GWS/26/004':{opened:183,present:170,absent:13},
+  'GWS/26/005':{opened:183,present:179,absent:4},
+};
 
-function total(s){ return (s.ca1||0)+(s.ca2||0)+(s.exam||0); }
+// ---- Editable comments, teacher signature & school stamp (persisted locally) ----
+const teacherEntries = {};
+const headTeacherEntries = {};
+let stampData = '';
+students.forEach(st=>{
+  teacherEntries[st.id] = { comment:(comments[st.id]&&comments[st.id].teacher)||'', signature:'' };
+  headTeacherEntries[st.id] = { comment:(comments[st.id]&&comments[st.id].headTeacher)||'' };
+});
+function saveState(){
+  try{ localStorage.setItem('aiss_state', JSON.stringify({teacherEntries, headTeacherEntries, stampData})); }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem('aiss_state');
+    if(raw){
+      const d = JSON.parse(raw);
+      if(d.teacherEntries) Object.keys(d.teacherEntries).forEach(k=>{ teacherEntries[k]=teacherEntries[k]||{}; Object.assign(teacherEntries[k], d.teacherEntries[k]); });
+      if(d.headTeacherEntries) Object.keys(d.headTeacherEntries).forEach(k=>{ headTeacherEntries[k]=headTeacherEntries[k]||{}; Object.assign(headTeacherEntries[k], d.headTeacherEntries[k]); });
+      if(d.stampData) stampData = d.stampData;
+    }
+  }catch(e){}
+}
+function readFileAsDataURL(file, cb){
+  const r = new FileReader();
+  r.onload = ()=>cb(r.result);
+  r.readAsDataURL(file);
+}
+loadState();
+
+let published = true;
+let currentSubject = (subjects.find(s=>!s.submitted) || {}).name || subjects[0].name; // first subject for live entry
+
+function total(s){ return (s.ca1||0)+(s.ca2||0)+(s.ca3||0)+(s.exam||0); }
 function gradeFor(t){
   if(t>=70) return 'A';
   if(t>=60) return 'B';
@@ -498,27 +750,24 @@ document.querySelectorAll('.tab').forEach(tab=>{
 });
 
 function renderAdmin(){
-  const submittedCount = subjects.filter(s=>s.submitted).length;
-  document.getElementById('admin-cards').innerHTML = `
-    <div class="card"><div class="num">${students.length}</div><div class="label">Students · JSS2</div></div>
-    <div class="card"><div class="num">${subjects.length}</div><div class="label">Subjects this term</div></div>
-    <div class="card"><div class="num">${submittedCount}/${subjects.length}</div><div class="label">Subjects submitted</div></div>
-  `;
-  document.getElementById('admin-table').innerHTML = `
-    <tr><th>Subject</th><th>Teacher</th><th>Status</th></tr>
-    ${subjects.map(s=>`
-      <tr>
-        <td>${s.name}</td>
-        <td>${s.teacher}</td>
-        <td>${s.submitted?'<span class="pill ok">Submitted</span>':'<span class="pill pending">Pending</span>'}</td>
-      </tr>
-    `).join('')}
-  `;
-  const allIn = submittedCount === subjects.length;
-  document.getElementById('publish-status-text').textContent = published ? 'Published' : 'Not yet published';
-  document.getElementById('publish-status-note').textContent = published
-    ? 'Parents and students can now view and download results.'
-    : (allIn ? 'All subjects are in — ready to publish.' : `${subjects.length-submittedCount} subject(s) still pending. You can still publish now if needed.`);
+  const rows = students.map(st=>{
+    const rec = scores[st.id]||{};
+    let t = 0;
+    subjects.forEach(sn=>{ t += total(rec[sn.name]||{}); });
+    const avg = subjects.length ? Math.round(t/subjects.length*10)/10 : 0;
+    return `<tr>
+      <td>${st.name}</td>
+      <td>${st.id}</td>
+      <td class="num">${subjects.length}</td>
+      <td class="num">${avg}%</td>
+      <td><button class="btn gold" data-view="${st.id}">View Report</button></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('admin-students').innerHTML =
+    `<thead><tr><th>Student</th><th>Admission No.</th><th class="num">Subjects</th><th class="num">Avg</th><th>Action</th></tr></thead><tbody>${rows}</tbody>`;
+  const ps = document.getElementById('publish-status');
+  ps.textContent = published ? 'Published' : 'Draft';
+  ps.className = 'pill ' + (published ? 'ok' : 'pending');
   document.getElementById('publish-btn').textContent = published ? 'Re-publish' : 'Publish term results';
 }
 document.getElementById('publish-btn').addEventListener('click', ()=>{
@@ -526,54 +775,159 @@ document.getElementById('publish-btn').addEventListener('click', ()=>{
   renderAdmin();
 });
 
-const subjectSelect = document.getElementById('subject-select');
-subjectSelect.innerHTML = subjects.map(s=>`<option value="${s.name}">${s.name}</option>`).join('');
-subjectSelect.value = currentSubject;
-subjectSelect.addEventListener('change', ()=>{ currentSubject = subjectSelect.value; renderTeacher(); });
+const adminClass = document.getElementById('admin-class');
+adminClass.innerHTML = ['JSS 2 (Blue)'].map(c=>`<option value="${c}">${c}</option>`).join('');
+adminClass.value = 'JSS 2 (Blue)';
+let teacherStudentId = students[0].id;
 
 function renderTeacher(){
-  const subj = subjects.find(s=>s.name===currentSubject);
-  document.getElementById('teacher-subject-name').textContent = currentSubject;
-  document.getElementById('subject-status').innerHTML = subj.submitted ? '<span class="pill ok">Submitted</span>' : '<span class="pill pending">Pending</span>';
-  document.getElementById('teacher-table').innerHTML = `
-    <tr><th>Student</th><th class="num">CA1 /20</th><th class="num">CA2 /20</th><th class="num">Exam /60</th><th class="num">Total</th><th class="num">Grade</th></tr>
-    ${students.map(st=>{
-      const rec = (scores[st.id] && scores[st.id][currentSubject]) || {ca1:'',ca2:'',exam:''};
-      const t = total(rec);
-      return `
-      <tr data-student="${st.id}">
-        <td>${st.name}</td>
-        <td class="num"><input class="score" data-field="ca1" type="number" min="0" max="20" value="${rec.ca1}"></td>
-        <td class="num"><input class="score" data-field="ca2" type="number" min="0" max="20" value="${rec.ca2}"></td>
-        <td class="num"><input class="score" data-field="exam" type="number" min="0" max="60" value="${rec.exam}"></td>
-        <td class="num total-cell">${rec.ca1===''?'—':t}</td>
-        <td class="num grade-cell">${rec.ca1===''?'—':gradeFor(t)}</td>
+  const sid = teacherStudentId || students[0].id;
+  const st = students.find(s=>s.id===sid);
+  const label = document.getElementById('teacher-selected-student');
+  if(label) label.textContent = st ? `Entering scores for ${st.name} · ${st.id}` : '';
+  const rec = scores[sid]||{};
+  let grandT = 0, rowIdx = 0;
+  const body = subjectGroups.map(g=>{
+    let html = `<tr class="cat"><td colspan="7">${g.name}</td></tr>`;
+    g.subs.forEach(name=>{
+      const r = rec[name]||{ca1:0,ca2:0,ca3:0,exam:0};
+      const t = total(r);
+      grandT += t;
+      html += `<tr class="${rowIdx%2?'shade2':''}" data-subject="${name}">
+        <td>${name}</td>
+        <td class="num"><input data-field="ca1" type="number" min="0" max="20" value="${r.ca1}"></td>
+        <td class="num"><input data-field="ca2" type="number" min="0" max="10" value="${r.ca2}"></td>
+        <td class="num"><input data-field="ca3" type="number" min="0" max="10" value="${r.ca3}"></td>
+        <td class="num"><input data-field="exam" type="number" min="0" max="60" value="${r.exam}"></td>
+        <td class="num total-cell">${t}</td>
+        <td class="num grade-cell">${gradeFor(t)}</td>
       </tr>`;
-    }).join('')}
+      rowIdx++;
+    });
+    return html;
+  }).join('');
+  document.getElementById('teacher-table').innerHTML = `
+    <tr><th>SUBJECT</th><th class="num">CA1 /20</th><th class="num">CA2 /10</th><th class="num">CA3 /10</th><th class="num">EXAM /60</th><th class="num">TOTAL</th><th class="num">GRADE</th></tr>
+    ${body}
+    <tr class="gtotal"><td class="gt-l" colspan="5">TOTAL</td><td class="num">${grandT}</td><td class="num">${gradeFor(subjects.length?Math.round(grandT/subjects.length):0)}</td></tr>
   `;
-  document.querySelectorAll('#teacher-table input.score').forEach(inp=>{
+  document.querySelectorAll('#teacher-table input').forEach(inp=>{
     inp.addEventListener('input', ()=>{
-      const row = inp.closest('tr');
-      const sid = row.dataset.student;
+      const tr = inp.closest('tr');
+      const name = tr.dataset.subject;
       const field = inp.dataset.field;
-      scores[sid] = scores[sid] || {};
-      scores[sid][currentSubject] = scores[sid][currentSubject] || {ca1:0,ca2:0,exam:0};
-      scores[sid][currentSubject][field] = Number(inp.value)||0;
-      const t = total(scores[sid][currentSubject]);
-      row.querySelector('.total-cell').textContent = t;
-      row.querySelector('.grade-cell').textContent = gradeFor(t);
+      scores[sid] = scores[sid]||{};
+      scores[sid][name] = scores[sid][name]||{ca1:0,ca2:0,ca3:0,exam:0,term1:0,term2:0};
+      scores[sid][name][field] = Number(inp.value)||0;
+      const t = total(scores[sid][name]);
+      tr.querySelector('.total-cell').textContent = t;
+      tr.querySelector('.grade-cell').textContent = gradeFor(t);
     });
   });
 }
-document.getElementById('submit-scores-btn').addEventListener('click', ()=>{
-  subjects.find(s=>s.name===currentSubject).submitted = true;
-  renderTeacher();
-});
 
 const studentSelect = document.getElementById('student-select');
 studentSelect.innerHTML = students.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
 studentSelect.addEventListener('change', renderParent);
 document.getElementById('print-btn').addEventListener('click', ()=>window.print());
+
+// ---- Teacher tab: per-student comment + signature ----
+const tcStudent = document.getElementById('tc-student');
+tcStudent.innerHTML = students.map(s=>`<option value="${s.id}">${s.name} · ${s.id}</option>`).join('');
+tcStudent.value = teacherStudentId;
+const tcComment = document.getElementById('tc-comment');
+const tcSign = document.getElementById('tc-signature');
+const tcSignPreview = document.getElementById('tc-sign-preview');
+const tcSignName = document.getElementById('tc-sign-name');
+const tcSignClear = document.getElementById('tc-sign-clear');
+function loadTeacherEntry(sid){
+  const e = teacherEntries[sid]||{comment:'',signature:''};
+  tcComment.value = e.comment;
+  tcSignPreview.innerHTML = e.signature ? `<img src="${e.signature}" alt="signature preview">` : '<span class="muted">No signature uploaded</span>';
+  tcSignClear.hidden = !e.signature;
+  tcSignName.textContent = e.signature ? 'Signature attached' : '';
+}
+tcStudent.addEventListener('change', ()=>{
+  teacherStudentId = tcStudent.value;
+  loadTeacherEntry(tcStudent.value);
+  renderTeacher();
+});
+tcComment.addEventListener('input', ()=>{
+  teacherEntries[tcStudent.value] = teacherEntries[tcStudent.value]||{comment:'',signature:''};
+  teacherEntries[tcStudent.value].comment = tcComment.value;
+  saveState();
+});
+tcSign.addEventListener('change', ()=>{
+  const f = tcSign.files[0]; if(!f) return;
+  readFileAsDataURL(f, data=>{
+    teacherEntries[tcStudent.value] = teacherEntries[tcStudent.value]||{comment:'',signature:''};
+    teacherEntries[tcStudent.value].signature = data;
+    loadTeacherEntry(tcStudent.value);
+    saveState();
+  });
+});
+tcSignClear.addEventListener('click', ()=>{
+  teacherEntries[tcStudent.value] = teacherEntries[tcStudent.value]||{comment:'',signature:''};
+  teacherEntries[tcStudent.value].signature='';
+  loadTeacherEntry(tcStudent.value);
+  saveState();
+});
+loadTeacherEntry(tcStudent.value);
+
+// ---- Admin tab: per-student head-teacher comment + school stamp ----
+const htStudent = document.getElementById('ht-student');
+htStudent.innerHTML = students.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+htStudent.value = students[0].id;
+const htComment = document.getElementById('ht-comment');
+const htStamp = document.getElementById('ht-stamp');
+const htStampPreview = document.getElementById('ht-stamp-preview');
+const htStampName = document.getElementById('ht-stamp-name');
+const htStampClear = document.getElementById('ht-stamp-clear');
+function loadHeadEntry(sid){
+  const e = headTeacherEntries[sid]||{comment:''};
+  htComment.value = e.comment;
+  htStampPreview.innerHTML = stampData ? `<img src="${stampData}" alt="stamp preview">` : '<span class="muted">No stamp uploaded</span>';
+  htStampName.textContent = stampData ? 'Stamp attached' : '';
+  htStampClear.hidden = !stampData;
+}
+htStudent.addEventListener('change', ()=>loadHeadEntry(htStudent.value));
+htComment.addEventListener('input', ()=>{
+  headTeacherEntries[htStudent.value] = headTeacherEntries[htStudent.value]||{comment:''};
+  headTeacherEntries[htStudent.value].comment = htComment.value;
+  saveState();
+});
+htStamp.addEventListener('change', ()=>{
+  const f = htStamp.files[0]; if(!f) return;
+  readFileAsDataURL(f, data=>{
+    stampData = data;
+    loadHeadEntry(htStudent.value);
+    saveState();
+  });
+});
+htStampClear.addEventListener('click', ()=>{
+  stampData='';
+  loadHeadEntry(htStudent.value);
+  saveState();
+});
+loadHeadEntry(htStudent.value);
+
+// ---- Admin: students table -> view report preview ----
+document.getElementById('admin-students').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-view]');
+  if(!btn) return;
+  const sid = btn.dataset.view;
+  htStudent.value = sid;
+  loadHeadEntry(sid);
+  showAdminPreview(sid);
+});
+function showAdminPreview(sid){
+  const st = students.find(s=>s.id===sid)||{name:''};
+  const wrap = document.getElementById('admin-report-preview');
+  wrap.innerHTML = `<div class="preview-head"><h3>Result Preview — ${st.name} (${sid})</h3><button class="btn" id="preview-close">&times; Close preview</button></div>` + reportCardHTML(sid);
+  wrap.hidden = false;
+  const close = document.getElementById('preview-close');
+  close.addEventListener('click', ()=>{ wrap.hidden = true; });
+}
 
 function classAverages(){
   const submittedSubjects = subjects.filter(s=>s.submitted).map(s=>s.name);
@@ -585,6 +939,160 @@ function classAverages(){
   }).sort((a,b)=>b.avg-a.avg);
 }
 
+function reportCardHTML(sid){
+  const st = students.find(s=>s.id===sid);
+  const rec = scores[sid]||{};
+  const att = attendance[sid]||{opened:0,present:0,absent:0};
+  const psycho = psychomotor[sid]||{};
+  const affect = affective[sid]||{};
+  const te = teacherEntries[sid]||{comment:'',signature:''};
+  const he = headTeacherEntries[sid]||{comment:''};
+
+  const count = subjects.length;
+  const marksObtainable = count*100;
+  let grandT=0, sumT1=0, sumT2=0, avgSum=0, rowIdx=0;
+
+  const rows = subjectGroups.map(g=>{
+    let html = `<tr class="cat"><td colspan="11">${g.name}</td></tr>`;
+    g.subs.forEach(name=>{
+      const r = rec[name]||{ca1:0,ca2:0,ca3:0,exam:0,term1:0,term2:0};
+      const t = total(r);
+      const avg = Math.round((t+r.term1+r.term2)/3*10)/10;
+      const gd = gradeFor(avg);
+      const rm = remarkFor(avg);
+      grandT += t; sumT1 += r.term1; sumT2 += r.term2; avgSum += avg;
+      html += `<tr class="${rowIdx%2?'shade':''}"><td class="l">${name}</td><td class="n">${r.ca1}</td><td class="n">${r.ca2}</td><td class="n">${r.ca3}</td><td class="n">${r.exam}</td><td class="n subj-total">${t}</td><td class="n">${r.term1}</td><td class="n">${r.term2}</td><td class="n">${avg}</td><td class="n">${gd}</td><td class="l">${rm}</td></tr>`;
+      rowIdx++;
+    });
+    return html;
+  }).join('');
+
+  const overallAvg = count ? Math.round(grandT/count*10)/10 : 0;
+  const overallGrade = gradeFor(overallAvg);
+  const overallRemark = remarkFor(overallAvg);
+  const pct = marksObtainable ? Math.round(grandT/marksObtainable*100) : 0;
+  const titleText = `${schoolInfo.termNo}${ordinal(schoolInfo.termNo).toUpperCase()} TERM PUPILS PERFORMANCE REPORT`;
+
+  return `
+    <div class="result-sheet">
+      <div class="sheet-letterhead">
+        <div class="sheet-brand">
+          <div class="sheet-crest">AISS</div>
+          <div class="sheet-school-name">${schoolInfo.name}</div>
+          <div class="sheet-school-motto">${schoolInfo.motto}</div>
+          <div class="sheet-school-addr">${schoolInfo.address}<br>${schoolInfo.contact}</div>
+        </div>
+        <div class="sheet-photo"><div><strong>STUDENT<br>PHOTO</strong><div style="margin-top:4px;font-size:8.5px;font-style:italic;">(placeholder)</div></div></div>
+      </div>
+
+      <div class="sheet-title">${titleText}</div>
+
+      <table class="sheet-info">
+        <tr>
+          <td class="k">Student Name:</td><td class="v name-cell">${st.name}</td>
+          <td class="k">Class:</td><td class="v">${schoolInfo.class}</td>
+        </tr>
+        <tr>
+          <td class="k">Admission Number:</td><td class="v">${st.id}</td>
+          <td class="k">Date of Birth:</td><td class="v">${st.dob}</td>
+        </tr>
+        <tr>
+          <td class="k">No. of Subjects:</td><td class="v">${count}</td>
+          <td class="k">Average Score for Term:</td><td class="v">${overallAvg}%</td>
+        </tr>
+        <tr>
+          <td class="k">Academic Session:</td><td class="v">${schoolInfo.session}</td>
+          <td class="k">Term:</td><td class="v">${schoolInfo.term}</td>
+        </tr>
+      </table>
+
+      <table class="sheet-results">
+        <thead>
+          <tr class="head">
+            <th>SUBJECTS</th><th>1ST CA</th><th>2ND CA</th><th>3RD CA</th><th>EXAM</th><th>TOTAL</th><th>1ST TERM</th><th>2ND TERM</th><th>AVERAGE</th><th>GRADE</th><th>REMARKS</th>
+          </tr>
+          <tr class="obtain">
+            <th>Marks Obtainable</th><th>20</th><th>10</th><th>10</th><th>60</th><th>100</th><th>100</th><th>100</th><th>100</th><th>&nbsp;</th><th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+          <tr class="gtotal">
+            <td class="gt-l" colspan="5">TOTAL</td>
+            <td class="n">${grandT}</td>
+            <td class="n">${sumT1}</td>
+            <td class="n">${sumT2}</td>
+            <td class="n">${overallAvg}</td>
+            <td class="n">${overallGrade}</td>
+            <td class="l">${overallRemark}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sheet-blocks">
+        <div class="sheet-block">
+          <div class="bt">ATTENDANCE TABLE</div>
+          <table>
+            <tr><td class="k">Times School Opened</td><td class="n">${att.opened}</td></tr>
+            <tr><td class="k">Times Present</td><td class="n">${att.present}</td></tr>
+            <tr><td class="k">Times Absent</td><td class="n">${att.absent}</td></tr>
+          </table>
+        </div>
+        <div class="sheet-block">
+          <div class="bt">MARKS OBTAINABLE / OBTAINED</div>
+          <table>
+            <tr><td class="k">Marks Obtainable</td><td class="n">${marksObtainable}</td></tr>
+            <tr><td class="k">Marks Obtained</td><td class="n">${grandT}</td></tr>
+            <tr><td class="k">Percentage (%)</td><td class="n">${pct}%</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="sheet-legend">
+        <div class="bt">KEY &mdash; PSYCHOMOTOR &amp; AFFECTIVE RATINGS</div>
+        <div class="body"><strong>E</strong> = Exceeds &nbsp;&nbsp;|&nbsp;&nbsp; <strong>M</strong> = Meets &nbsp;&nbsp;|&nbsp;&nbsp; <strong>A</strong> = Approaching &nbsp;&nbsp;|&nbsp;&nbsp; <strong>B</strong> = Below</div>
+      </div>
+
+      <div class="sheet-domains">
+        <div class="sheet-domain">
+          <div class="dt">PSYCHOMOTOR DOMAIN</div>
+          <table>
+            ${psychoTraits.map(tr=>`<tr><td>${tr}</td><td class="rt">${psycho[tr]||'—'}</td></tr>`).join('')}
+          </table>
+        </div>
+        <div class="sheet-domain">
+          <div class="dt">AFFECTIVE ASSESSMENT</div>
+          <table>
+            ${affectiveTraits.map(tr=>`<tr><td>${tr}</td><td class="rt">${affect[tr]||'—'}</td></tr>`).join('')}
+          </table>
+        </div>
+      </div>
+
+      <div class="sheet-comment">
+        <div class="ct">TEACHER'S COMMENTS</div>
+        <div class="cb">${te.comment}</div>
+        ${te.signature ? `<div class="cb-sig"><img src="${te.signature}" alt="Class teacher signature"></div>` : ''}
+      </div>
+      <div class="sheet-comment">
+        <div class="ct">HEAD-TEACHER'S COMMENTS</div>
+        <div class="cb">${he.comment}</div>
+      </div>
+
+      <div class="sheet-resumption">
+        <span>NEXT RESUMPTION DATE: ${schoolInfo.nextResumption}</span>
+        <span>TERM: ${schoolInfo.term} &middot; SESSION: ${schoolInfo.session}</span>
+      </div>
+
+      <div class="sheet-signatures">
+        <div class="sheet-sig ${te.signature?'has-sig':''}">${te.signature?`<img class="sig-img" src="${te.signature}" alt="signature">`:''}<div class="line">Class Teacher</div><div class="sub">Signature &amp; Date</div></div>
+        <div class="sheet-sig"><div class="line">Head Teacher</div><div class="sub">Signature &amp; Date</div></div>
+        <div class="sheet-sig"><div class="line">Sign &amp; Stamp</div><div class="sub">Official Stamp</div></div>
+        <div class="sheet-stamp">${stampData?`<img src="${stampData}" alt="Official stamp">`:`<div class="inner">OFFICIAL<br>STAMP</div>`}</div>
+      </div>
+    </div>
+  `;
+}
+
 function renderParent(){
   const sid = studentSelect.value || students[0].id;
   const container = document.getElementById('parent-content');
@@ -592,123 +1100,7 @@ function renderParent(){
     container.innerHTML = `<div class="locked">Results for this term haven't been published yet.<br>Check back once the exam office releases them.</div>`;
     return;
   }
-  const st = students.find(s=>s.id===sid);
-  const rec = scores[sid]||{};
-  const rankings = classAverages();
-  const position = rankings.findIndex(r=>r.id===sid)+1;
-  const myAvg = rankings.find(r=>r.id===sid).avg;
-  const classAvg = classAverageOverall();
-  const submitted = subjects.filter(s=>s.submitted);
-  let grandTotal = 0;
-  submitted.forEach(s=>{
-    const r = rec[s.name]||{ca1:0,ca2:0,exam:0};
-    grandTotal += total(r);
-  });
-
-  container.innerHTML = `
-    <div class="result-sheet">
-      <header class="result-header">
-        <div class="row">
-          <div class="crest">GW</div>
-          <div class="school-block">
-            <div class="school-name">${schoolInfo.name}</div>
-            <div class="school-sub">${schoolInfo.address} &middot; ${schoolInfo.contact}</div>
-          </div>
-        </div>
-        <div class="result-title">TERMLY RESULT SHEET</div>
-      </header>
-
-      <div class="student-info-bar">
-        <div class="info-group"><span class="label">Student Name</span><span class="value">${st.name}</span></div>
-        <div class="info-group"><span class="label">Admission No.</span><span class="value">${st.id}</span></div>
-        <div class="info-group"><span class="label">Class</span><span class="value">${schoolInfo.class}</span></div>
-        <div class="info-group"><span class="label">Term</span><span class="value">${schoolInfo.term}</span></div>
-        <div class="info-group"><span class="label">Session</span><span class="value">${schoolInfo.session}</span></div>
-      </div>
-
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Subject</th><th class="num">1st CA</th><th class="num">2nd CA</th>
-            <th class="num">Exam</th><th class="num">Total</th><th class="num">Grade</th>
-            <th>Remark</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${submitted.map(s=>{
-            const r = rec[s.name]||{ca1:0,ca2:0,exam:0};
-            const t = total(r);
-            const g = gradeFor(t);
-            return `<tr>
-              <td>${s.name}</td>
-              <td class="num">${r.ca1}</td>
-              <td class="num">${r.ca2}</td>
-              <td class="num">${r.exam}</td>
-              <td class="num"><strong>${t}</strong></td>
-              <td class="num grade-${g}">${g}</td>
-              <td>${remarkFor(t)}</td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-
-      <div class="summary-block">
-        <div class="summary-item total"><div class="num">${grandTotal}</div><div class="label">Total Score</div></div>
-        <div class="summary-item average"><div class="num">${myAvg.toFixed(1)}</div><div class="label">Average</div></div>
-        <div class="summary-item position"><div class="num">${position}${ordinal(position)}</div><div class="label">Class Position</div></div>
-        <div class="summary-item subjects"><div class="num">${submitted.length}</div><div class="label">No. of Subjects</div></div>
-        <div class="summary-item classavg"><div class="num">${classAvg.toFixed(1)}</div><div class="label">Class Average</div></div>
-      </div>
-
-      <div class="section-heading">Psychomotor / Affective Domain</div>
-      <table class="psychometric-table">
-        <thead>
-          <tr><th>Trait</th><th class="num">Rating (A&ndash;E)</th></tr>
-        </thead>
-        <tbody>
-          ${psychoTraits.map(trait=>{
-            const r = (behavior[sid]||{})[trait] || 'E';
-            return `<tr><td>${trait}</td><td class="num grade-${r}">${r}</td></tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-      <div class="psycho-legend">
-        <span><strong>A</strong> Excellent</span>
-        <span><strong>B</strong> Very Good</span>
-        <span><strong>C</strong> Good</span>
-        <span><strong>D</strong> Fair</span>
-        <span><strong>E</strong> Needs Improvement</span>
-      </div>
-
-      <div class="report-footer">
-        <div class="comment-block">
-          <div class="comment-label">Teacher's Comment</div>
-          <div class="comment-box">${(comments[sid]&&comments[sid].teacher)||''}</div>
-        </div>
-        <div class="comment-block">
-          <div class="comment-label">Principal's Comment</div>
-          <div class="comment-box">${(comments[sid]&&comments[sid].principal)||''}</div>
-        </div>
-        <div class="signature-row">
-          <div class="signature-line">
-            <div class="sig-underline"></div>
-            <div class="sig-label">Class Teacher</div>
-            <div class="sig-sub">Signature &amp; Date</div>
-          </div>
-          <div class="signature-line">
-            <div class="sig-underline"></div>
-            <div class="sig-label">Principal</div>
-            <div class="sig-sub">Signature &amp; Date</div>
-          </div>
-          <div class="signature-line">
-            <div class="sig-underline"></div>
-            <div class="sig-label">Head of Studies</div>
-            <div class="sig-sub">Signature &amp; Date</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+  container.innerHTML = reportCardHTML(sid);
 }
 
 renderAdmin();
