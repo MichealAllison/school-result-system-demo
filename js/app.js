@@ -149,7 +149,7 @@ function renderTeacher(){
   const sid = teacherStudentId || students[0].id;
   const st = students.find(s=>s.id===sid);
   const label = document.getElementById('teacher-selected-student');
-  if(label) label.textContent = st ? `Entering scores for ${st.name} Â· ${st.id}` : '';
+  if(label) label.textContent = st ? `Entering scores for ${st.name} · ${st.id}` : '';
   document.getElementById('teacher-term').value = String(termId);
   renderScoreEditor('teacher-table', termId, sid);
   renderStudentAux('teacher-aux', termId, sid);
@@ -168,7 +168,7 @@ document.getElementById('print-btn').addEventListener('click', ()=>window.print(
 
 // ---- Teacher tab: select student -> comment, signature & submit (per term) ----
 const tcStudent = document.getElementById('tc-student');
-tcStudent.innerHTML = students.map(s=>`<option value="${s.id}">${s.name} Â· ${s.id}</option>`).join('');
+tcStudent.innerHTML = students.map(s=>`<option value="${s.id}">${s.name} · ${s.id}</option>`).join('');
 tcStudent.value = teacherStudentId;
 const tcComment = document.getElementById('tc-comment');
 const tcSign = document.getElementById('tc-signature');
@@ -277,7 +277,7 @@ function showAdminPreview(sid, termId){
   const st = students.find(s=>s.id===sid)||{name:''};
   const tm = TERMS.find(t=>t.id===termId)||{label:''};
   const wrap = document.getElementById('admin-report-preview');
-  wrap.innerHTML = `<div class="preview-head"><h3>Result Preview â€” ${st.name} (${sid}) Â· ${tm.label}</h3><button class="btn" id="preview-close">&times; Close preview</button></div>` + reportCardHTML(sid, termId);
+  wrap.innerHTML = `<div class="preview-head"><h3>Result Preview — ${st.name} (${sid}) · ${tm.label}</h3><button class="btn" id="preview-close">&times; Close preview</button></div>` + reportCardHTML(sid, termId);
   wrap.hidden = false;
   document.getElementById('preview-close').addEventListener('click', ()=>{ wrap.hidden = true; });
 }
@@ -353,16 +353,21 @@ function reportCardHTML(sid, termId){
 
   return `
     <div class="result-sheet">
+     <div class="sheet-watermark">
+        <img src="/logo.png" alt=""/>
+      </div>
       <div class="sheet-letterhead">
         <div class="sheet-brand">
           <div class="sheet-crest">
           <div class="crest">
-    <img src="/logo.png" alt="austrail-international-school" style="width:50px;height:50px;"/>
-  </div>
+            <img src="/logo.png" alt="austrail-international-school" style="width:100px;height:100px;"/>
+            <img src="/coat-arm.png" alt="austrail-international-school" style="width:100px;height:100px;"/>
           </div>
-          <div class="sheet-school-name">${schoolInfo.name}</div>
+          </div>
           <div class="sheet-school-motto">${schoolInfo.motto}</div>
-          <div class="sheet-school-addr">${schoolInfo.address}<br>${schoolInfo.contact}</div>
+          <div class="sheet-school-name">${schoolInfo.name}</div>
+          <div class="sheet-school-addr">${schoolInfo.address}<br>${schoolInfo.address2}</div>
+           <div class="sheet-school-addr">${schoolInfo.contact}</div>
         </div>
         <div class="sheet-photo"><div><strong>STUDENT<br>PHOTO</strong><div style="margin-top:4px;font-size:8.5px;font-style:italic;">(placeholder)</div></div></div>
       </div>
@@ -434,13 +439,13 @@ function reportCardHTML(sid, termId){
         <div class="sheet-domain">
           <div class="dt">PSYCHOMOTOR DOMAIN</div>
           <table>
-            ${psychoTraits.map(tr=>`<tr><td>${tr}</td><td class="rt">${psycho[tr]||'â€”'}</td></tr>`).join('')}
+            ${psychoTraits.map(tr=>`<tr><td>${tr}</td><td class="rt">${psycho[tr]||'—'}</td></tr>`).join('')}
           </table>
         </div>
         <div class="sheet-domain">
           <div class="dt">AFFECTIVE ASSESSMENT</div>
           <table>
-            ${affectiveTraits.map(tr=>`<tr><td>${tr}</td><td class="rt">${affect[tr]||'â€”'}</td></tr>`).join('')}
+            ${affectiveTraits.map(tr=>`<tr><td>${tr}</td><td class="rt">${affect[tr]||'—'}</td></tr>`).join('')}
           </table>
         </div>
       </div>

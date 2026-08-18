@@ -8,9 +8,10 @@
 
 const schoolInfo = {
   name:'AUSTRALIAN INTERNATIONAL STANDARD SCHOOL',
-  motto:'Learning Â· Excellence Â· Discipline',
-  address:'No. 15 Greenwood Avenue, G.R.A., Ikeja, Lagos, Nigeria',
-  contact:'Tel: +234 1 271 0044 | Email: info@aiss.edu.ng | www.aiss.edu.ng',
+  motto:'Motor: Bring, Belonging, Becoming',
+  address:'Abuja: 336, Basic Estate, Lokogoma Abuja, FCT, Nigeira',
+  address2:'Sydney: 1 Market street Sydney NSW 2000',
+  contact:'Tel: +234 909 123 4585 | Email: Admin@aissng.com | www.aiss.com',
   session:'2025/2026 Academic Session',
   term:'Third Term',
   termNo:3,
